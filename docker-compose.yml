@@ -69,6 +69,21 @@ services:
     depends_on:
       - elasticsearch
 
+  python:
+    build:
+      context: python/
+    volumes:
+      - type: bind
+        source: ./python/src
+        target: /usr/src/app
+#        read_only: true
+    ports:
+      - "5555:5555"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
 networks:
   elk:
     driver: bridge
